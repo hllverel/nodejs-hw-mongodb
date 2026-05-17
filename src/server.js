@@ -6,7 +6,7 @@ import { getAllContacts, getContactById } from './services/contacts.js';
 
 export default function setupServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT || 3000;;
 
   app.use(cors());
 
@@ -39,12 +39,12 @@ export default function setupServer() {
 
     res.status(200).json({
       status: 200,
-      message: "Successfully found contact with id ${contactId}!",
+      message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
   });
 
-  app.use((err, req, res, next) => {
+  app.use((req, res) => {
     res.status(404).json({
         message: 'Not found',
     });
