@@ -7,10 +7,10 @@ export const createContactSchema = Joi.object({
         'string.max': 'Name should have at most {#limit} characters',
         'any.required': 'Name is required',
         }),
-    phoneNumber: Joi.string.min(3).max(20).required(),
-    email: Joi.string.min(3).max(20),
+    phoneNumber: Joi.string().min(3).max(20).required(),
+    email: Joi.string().min(3).max(20),
     isFavourite: Joi.boolean,
-    contactType: Joi.string().valid('work', 'home', 'personal').required,
+    contactType: Joi.string().valid('work', 'home', 'personal').required(),
 });
 
 export const updateContactSchema = Joi.object({
@@ -20,8 +20,8 @@ export const updateContactSchema = Joi.object({
         'string.max': 'Name should have at most {#limit} characters',
         'any.required': 'Name is required',
         }),
-    phoneNumber: Joi.string.min(3).max(20).required(),
-    email: Joi.string.min(3).max(20),
+    phoneNumber: Joi.string().min(3).max(20).required(),
+    email: Joi.string().min(3).max(20),
     isFavourite: Joi.boolean,
-    contactType: Joi.string().valid('work', 'home', 'personal').required,
+    contactType: Joi.string().valid('work', 'home', 'personal').required(),
 });
