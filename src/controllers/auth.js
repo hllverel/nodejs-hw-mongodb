@@ -1,5 +1,5 @@
 import { registerUser, loginUser, logoutUser, refreshUsersSession } from "../services/auth.js";
-import {ONE_DAY} from "../constants/index.js";
+import {THIRTY_DAYS} from "../constants/index.js";
 
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
@@ -16,15 +16,15 @@ export const loginUserController = async (req, res) => {
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
 
   res.cookie('sessionId', session._id, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
 
-  res.json({
+  res.status(200).json({
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
@@ -47,11 +47,11 @@ export const logoutUserController = async (req, res) => {
 const setupSession = (res, session) => {
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
   res.cookie('sessionId', session._id, {
     httpOnly: true,
-    expires: new Date(Date.now() + ONE_DAY),
+    expires: new Date(Date.now() + THIRTY_DAYS),
   });
 };
 
