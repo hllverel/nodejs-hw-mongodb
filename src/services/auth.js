@@ -110,7 +110,7 @@ export const requestResetToken = async (email) => {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: '15m',
+      expiresIn: '5m',
     },
   );
 
@@ -129,12 +129,19 @@ export const requestResetToken = async (email) => {
     link: `${process.env.APP_DOMAIN}/reset-password?token=${resetToken}`,
   });
 
+try {
   await sendEmail({
     from: process.env[SMTP.SMTP_FROM],
     to: email,
     subject: 'Reset your password',
     html,
   });
+} catch (err) {
+  throw createHttpError(
+    500,
+    'Failed to send the email, please try again later.',
+  );
+}
 };
 
 export const resetPassword = async (payload) => {
@@ -153,7 +160,7 @@ export const resetPassword = async (payload) => {
   });
 
   if (!user) {
-    throw createHttpError(404, 'User not found');
+    throw createHttpError(404, 'User not found!');
   }
 
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
