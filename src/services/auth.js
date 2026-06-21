@@ -129,12 +129,12 @@ export const requestResetToken = async (email) => {
     link: `${process.env.APP_DOMAIN}/reset-password?token=${resetToken}`,
   });
 
-  // await sendEmail({
-  //   from: process.env[SMTP.SMTP_FROM],
-  //   to: email,
-  //   subject: 'Reset your password',
-  //   html,
-  // });
+  await sendEmail({
+    from: process.env[SMTP.SMTP_FROM],
+    to: email,
+    subject: 'Reset your password',
+    html,
+  });
 };
 
 export const resetPassword = async (payload) => {
