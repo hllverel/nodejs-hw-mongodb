@@ -7,7 +7,10 @@
     "lint": "eslint src/**/*.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon ./src/index.js | pino-pretty",
+    "build": "npm run build-docs",
+    "build-docs": "redocly bundle docs/openapi.yaml --ext json -o docs/swagger.json",
+    "preview-docs": "redocly build-docs docs/openapi.yaml -o docs/redoc.html"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,7 @@
   "homepage": "https://github.com/hllverel/nodejs-hw-mongodb#readme",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@redocly/cli": "^2.35.1",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
     "nodemon": "^3.1.14",
@@ -33,6 +37,7 @@
     "cloudinary": "^2.10.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "google-auth-library": "^10.9.0",
     "handlebars": "^4.7.9",
@@ -43,6 +48,7 @@
     "mongoose": "^9.6.2",
     "multer": "^2.2.0",
     "nodemailer": "^9.0.1",
-    "pino-http": "^11.0.0"
+    "pino-http": "^11.0.0",
+    "swagger-ui-express": "^5.0.1"
   }
 }
